@@ -7,6 +7,9 @@ const initializeService = async () => {
   try {
     dotenv.config();
     await db.sequelize.sync();
+    return {
+      message: 'success',
+    };
   } catch (e) {
     console.log(e);
     log.error(`Catch for initializeService, ERROR: ${JSON.stringify(e)}`);
@@ -14,6 +17,4 @@ const initializeService = async () => {
   }
 };
 
-module.exports = {
-  initializeService,
-};
+module.exports = initializeService;

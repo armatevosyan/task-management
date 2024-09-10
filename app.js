@@ -5,21 +5,10 @@ const createError = require('http-errors');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
-const rateLimit = require('express-rate-limit');
 
 const indexRouter = require('./routes/index');
 
 const app = express();
-
-const limiter = rateLimit({
-  windowMs: 30 * 1000,
-  max: 50,
-  message:
-    'Too many requests from this API, please try again after 30 seconds later .',
-});
-
-app.use(limiter);
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 

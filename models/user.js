@@ -40,11 +40,13 @@ module.exports = (sequelize, Sequelize) => {
       },
       verifyToken: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: null,
       },
       verifyDate: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: null,
       },
     },
     {
