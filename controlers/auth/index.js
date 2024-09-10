@@ -181,9 +181,9 @@ const login = async (req, res) => {
         user,
       },
     });
-  } catch (e) {
-    log.error(`Catch error in the function login, ERROR ${e.message}`);
-    console.log(e);
+  } catch (err) {
+    log.error(`Catch error in the function login, ERROR ${err.message}`);
+    console.log(err);
 
     return res.status(500).json({
       message: 'Internal server error',

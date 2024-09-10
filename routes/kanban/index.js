@@ -10,6 +10,7 @@ router.post(
   validateActionAllowed(ACTIONS.ADD_TASK),
   controller.addColumn,
 );
+
 router.post(
   '/add-task',
   validateActionAllowed(ACTIONS.ADD_TASK),

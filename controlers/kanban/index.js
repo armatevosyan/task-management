@@ -37,7 +37,7 @@ const addColumn = async (req, res) => {
         },
       });
     }
-    console.log('newColumn', newColumn);
+
     return res.status(200).json({
       message: 'Success',
       data: newColumn,
@@ -89,9 +89,9 @@ const addTask = async (req, res) => {
       message: 'Task created successfully',
       data: task,
     });
-  } catch (e) {
-    console.log(e);
-    log.error(`Catch error in the function addTask, ERROR ${e.message}`);
+  } catch (err) {
+    console.log(err);
+    log.error(`Catch error in the function addTask, ERROR ${err.message}`);
     return res.status(500).json({
       message: 'Internal server error.',
     });
