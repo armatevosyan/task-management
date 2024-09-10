@@ -2,49 +2,42 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('TaskTrackings', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      roleId: {
+      taskId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Roles',
+          model: 'Kanbans',
           key: 'id',
         },
-        onDelete: 'Cascade',
+        onDelete: 'cascade',
         allowNull: false,
       },
-      firstName: {
-        type: Sequelize.STRING,
+      userId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
+        onDelete: 'cascade',
         allowNull: false,
       },
-      lastName: {
-        type: Sequelize.STRING,
+      startTime: {
+        type: Sequelize.DATE,
         allowNull: false,
       },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      phone: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      password: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      verifyToken: {
-        type: Sequelize.STRING,
+      endTime: {
+        type: Sequelize.DATE,
         allowNull: true,
         defaultValue: null,
       },
-      verifyDate: {
-        type: Sequelize.DATE,
+      duration: {
+        type: Sequelize.INTEGER,
         allowNull: true,
         defaultValue: null,
       },
@@ -58,7 +51,7 @@ module.exports = {
       },
     });
   },
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Users');
+  async down(queryInterface) {
+    await queryInterface.dropTable('TaskTrackings');
   },
 };

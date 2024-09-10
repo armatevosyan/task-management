@@ -2,51 +2,55 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('Kanbans', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      roleId: {
+      columnId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Roles',
+          model: 'KanbanColumns',
           key: 'id',
         },
         onDelete: 'Cascade',
-        allowNull: false,
       },
-      firstName: {
+      title: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      lastName: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      phone: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      password: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      verifyToken: {
+      description: {
         type: Sequelize.STRING,
         allowNull: true,
         defaultValue: null,
       },
-      verifyDate: {
+      dueDate: {
         type: Sequelize.DATE,
         allowNull: true,
         defaultValue: null,
+      },
+      priority: {
+        type: Sequelize.ENUM('low', 'medium', 'high'),
+        allowNull: true,
+        defaultValue: null,
+      },
+      createdBy: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
+        onDelete: 'no action',
+      },
+      userId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
+        onDelete: 'no action',
       },
       createdAt: {
         allowNull: false,
@@ -58,7 +62,7 @@ module.exports = {
       },
     });
   },
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Users');
+  async down(queryInterface) {
+    await queryInterface.dropTable('Kanbans');
   },
 };
