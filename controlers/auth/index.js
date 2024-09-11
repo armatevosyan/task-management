@@ -74,7 +74,7 @@ const register = async (req, res) => {
 
     if (!existingRole) {
       await transaction.rollback();
-      return res.status(400).json({
+      return res.status(404).json({
         message: 'Role not found',
       });
     }
@@ -136,12 +136,15 @@ const login = async (req, res) => {
 
     if (error) {
       return res.status(400).json({
-        message: 'Invalid credentials',
+        message: 'Validation error',
       });
     }
 
     let user = await User.findOne({
       where: { email: data.email },
+      attributes: {
+        exclude: ['password', 'verifyToken'],
+      },
     });
 
     if (!user) {
@@ -167,12 +170,6 @@ const login = async (req, res) => {
       },
       process.env.APP_SECRET,
     );
-
-    await user.reload({
-      attributes: {
-        exclude: ['password', 'verifyToken'],
-      },
-    });
 
     return res.status(200).json({
       message: 'Login success',

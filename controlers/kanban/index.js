@@ -87,8 +87,8 @@ const updateColumn = async (req, res) => {
 
     const column = await KanbanColumn.findByPk(id);
 
-    if (column) {
-      return res.status(400).json({
+    if (!column) {
+      return res.status(404).json({
         message: 'Column not found',
       });
     }
@@ -139,7 +139,7 @@ const deleteColumn = async (req, res) => {
     });
 
     if (!column) {
-      return res.status(400).json({
+      return res.status(404).json({
         message: 'Column not found or not allowed to remove',
       });
     }
@@ -286,7 +286,7 @@ const getTask = async (req, res) => {
     });
 
     if (!task) {
-      return res.status(400).json({
+      return res.status(404).json({
         message: 'Task not found',
       });
     }
@@ -320,7 +320,7 @@ const updateTask = async (req, res) => {
 
     const existingTask = await Kanban.findByPk(id);
     if (!existingTask) {
-      return res.status(400).json({
+      return res.status(404).json({
         message: 'Task not found',
       });
     }
@@ -381,7 +381,7 @@ const deleteTask = async (req, res) => {
 
     const existingTask = await Kanban.findByPk(id);
     if (!existingTask) {
-      return res.status(400).json({
+      return res.status(404).json({
         message: 'Task not found',
       });
     }
@@ -407,14 +407,14 @@ const assignTask = async (req, res) => {
 
     const task = await Kanban.findByPk(id);
     if (!task) {
-      return res.status(400).json({
+      return res.status(404).json({
         message: 'Task not found',
       });
     }
 
     const user = await User.findByPk(userId);
     if (!user) {
-      return res.status(400).json({
+      return res.status(404).json({
         message: 'User not found',
       });
     }
@@ -450,7 +450,7 @@ const startTask = async (req, res) => {
 
     const task = await Kanban.findByPk(id);
     if (!task) {
-      return res.status(400).json({
+      return res.status(404).json({
         message: 'Task not found',
       });
     }
@@ -492,7 +492,7 @@ const stopTask = async (req, res) => {
 
     const task = await Kanban.findByPk(id);
     if (!task) {
-      return res.status(400).json({
+      return res.status(404).json({
         message: 'Task not found',
       });
     }
