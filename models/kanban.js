@@ -2,8 +2,10 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, Sequelize) => {
   class Kanban extends Model {
-    static associate({ KanbanColumn }) {
+    static associate({ KanbanColumn, User, TaskTracking }) {
       Kanban.belongsTo(KanbanColumn, { foreignKey: 'columnId', as: 'column' });
+      Kanban.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+      Kanban.hasMany(TaskTracking, { foreignKey: 'taskId', as: 'tracking' });
     }
   }
   Kanban.init(
@@ -15,6 +17,10 @@ module.exports = (sequelize, Sequelize) => {
           key: 'id',
         },
         onDelete: 'Cascade',
+      },
+      status: {
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       title: {
         type: Sequelize.STRING,

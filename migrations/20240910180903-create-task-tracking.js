@@ -37,7 +37,7 @@ module.exports = {
         defaultValue: null,
       },
       duration: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DOUBLE,
         allowNull: true,
         defaultValue: null,
       },
