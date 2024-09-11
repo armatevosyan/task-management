@@ -4,6 +4,7 @@ const Validators = {
   createColumn: function (user) {
     const schema = Joi.object({
       title: Joi.string().trim().required().max(40),
+      slug: Joi.string().trim().required().max(40),
     });
 
     return schema.validate(user);
@@ -13,6 +14,7 @@ const Validators = {
       title: Joi.string().trim().required().max(40),
       columnId: Joi.number().required().max(40),
       description: Joi.string().trim().allow(null, ''),
+      status: Joi.string().trim().allow(null, ''),
       dueDate: Joi.string().trim().required().max(40),
       priority: Joi.string()
         .valid('low', 'medium', 'high')

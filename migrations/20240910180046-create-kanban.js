@@ -17,6 +17,10 @@ module.exports = {
         },
         onDelete: 'Cascade',
       },
+      status: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       title: {
         type: Sequelize.STRING,
         allowNull: false,

@@ -7,6 +7,7 @@
     "watch": "nodemon --inspect ./bin/www",
     "model:generate": "npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string",
     "db:seed:generte": "npx sequelize-cli seed:generate --name name-of-your-seed.js",
+    "db:seed": "npx sequelize-cli db:seed --seed 20240911160654-add-default-kanban-columns.js",
     "db:seed:all": "npx sequelize-cli db:seed:all",
     "db:migrate:undo": "npx sequelize-cli db:migrate:undo --name 20240910180903-create-task-tracking.js",
     "db:migarate": "npx sequelize-cli db:migrate"

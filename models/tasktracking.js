@@ -2,8 +2,8 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, Sequelize) => {
   class TaskTracking extends Model {
-    static associate() {
-      // define association here
+    static associate({ Kanban }) {
+      TaskTracking.belongsTo(Kanban, { foreignKey: 'taskId', as: 'task' });
     }
   }
   TaskTracking.init(
@@ -36,7 +36,7 @@ module.exports = (sequelize, Sequelize) => {
         defaultValue: null,
       },
       duration: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DOUBLE,
         allowNull: true,
         defaultValue: null,
       },
